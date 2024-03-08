@@ -5,15 +5,15 @@ import { Request, Response } from 'express';
 import { updatePositionFactory } from "../factories/position/updatePositionFactory";
 import { findAllPositionFactory } from "../factories/position/findAllPositionFactory";
 import { findPositionByIdFactory } from "../factories/position/findPostionByIdFactory";
-import { deletePositionFactory } from "../factories/position/deletePositionFactory";
+import { authAdminMiddleware } from "../middlewares/authAdminMiddleware";
 
 export const positionRouter = Router();
 
-positionRouter.post('/', (request: Request, response: Response) => {
+positionRouter.post('/', authAdminMiddleware, (request: Request, response: Response) => {
   createPositionFactory().execute(new ExpressHttpContext(request, response));
 });
 
-positionRouter.put('/', (request: Request, response: Response) => {
+positionRouter.put('/', authAdminMiddleware, (request: Request, response: Response) => {
   updatePositionFactory().execute(new ExpressHttpContext(request, response));
 });
 positionRouter.get('/findById/', (request: Request, response: Response) => {
@@ -22,8 +22,8 @@ positionRouter.get('/findById/', (request: Request, response: Response) => {
 positionRouter.get('/findAll', (request: Request, response: Response) => {
   findAllPositionFactory().execute(new ExpressHttpContext(request, response));
 });
-positionRouter.delete('/', (request: Request, response: Response) => {
-  deletePositionFactory().execute(new ExpressHttpContext(request, response));
+positionRouter.delete('/', authAdminMiddleware, (request: Request, response: Response) => {
+  findPositionByIdFactory().execute(new ExpressHttpContext(request, response));
 });
 
 
