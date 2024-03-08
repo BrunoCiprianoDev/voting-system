@@ -21,7 +21,7 @@ export class UpdatePositionController extends ErrorHandlerControllers implements
         description: body.description ?? '',
       };
       const result = await this.updatePositionService.execute(userUpdateData);
-      httpContext.send({ statusCode: 201, body: result });
+      httpContext.send({ statusCode: 200, body: result });
     } catch (error) {
       httpContext.send(this.handleClientErrors(error));
     }

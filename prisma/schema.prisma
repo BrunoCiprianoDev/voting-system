@@ -22,10 +22,24 @@ model User {
   @@map("users")
 }
 
+model Election {
+  id          String      @id @default(uuid())
+  title       String
+  description String
+  isDeleted   Boolean     @default(true)
+  voter       Voter[]
+  Position    Position[]
+  candidate   Candidate[]
+
+  @@map("elections")
+}
+
 model Voter {
-  id           String @id @default(uuid())
-  registration String @unique
-  email        String @unique
+  id           String   @id @default(uuid())
+  registration String
+  email        String
+  election     Election @relation(fields: [electionId], references: [id])
+  electionId   String
 
   @@map("voters")
 }
@@ -34,7 +48,9 @@ model Position {
   id          String      @id @default(uuid())
   name        String
   description String
-  Candidate   Candidate[]
+  election    Election    @relation(fields: [electionId], references: [id])
+  candidate   Candidate[]
+  electionId  String
 
   @@map("positions")
 }
@@ -43,7 +59,9 @@ model Candidate {
   id         String   @id @default(uuid())
   name       String
   Position   Position @relation(fields: [positionId], references: [id])
+  election   Election @relation(fields: [electionId], references: [id])
   positionId String
+  electionId String
 
   @@map("candidates")
 }

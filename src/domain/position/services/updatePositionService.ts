@@ -29,7 +29,11 @@ export class UpdatePositionService extends ErrorHandlerServices implements IUpda
       if (!data.description || data.description.trim() === '') {
         throw new BadRequestError(ERROR_MSG_POSITION_DESCRIPTION_INVALID);
       }
-      await this.positionRespository.update(data);
+      const updatePosition = {
+        ...data,
+        electionId: isExists.election.id
+      }
+      await this.positionRespository.update(updatePosition);
       return data;
     } catch (error) {
       this.handleError(error);

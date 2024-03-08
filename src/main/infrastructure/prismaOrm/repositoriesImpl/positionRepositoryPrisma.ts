@@ -2,16 +2,21 @@ import { IPosition } from "../../../../domain/position/models/position";
 import { IPositionRepository } from "../../../../domain/position/repository/positionRepository";
 import BaseRepositoryPrisma from "./baseRepositoryPrisma";
 
-export class PositionRepository extends BaseRepositoryPrisma implements IPositionRepository {
+export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IPositionRepository {
 
   constructor() {
     super();
   }
 
-  public async create(position: IPosition): Promise<void> {
+  public async create({ id, name, description, election }: IPosition): Promise<void> {
     try {
       await this.dbClientInstance.position.create({
-        data: position,
+        data: {
+          id,
+          name,
+          description,
+          electionId: election.id
+        },
       })
 
     } catch (error) {
@@ -35,6 +40,7 @@ export class PositionRepository extends BaseRepositoryPrisma implements IPositio
     try {
       return await this.dbClientInstance.position.findUnique({
         where: { id },
+        include: { election: true }
       })
 
     } catch (error) {
@@ -55,7 +61,8 @@ export class PositionRepository extends BaseRepositoryPrisma implements IPositio
         select: {
           id: true,
           name: true,
-          description: true
+          description: true,
+          election: true
         },
       });
     } catch (error) {

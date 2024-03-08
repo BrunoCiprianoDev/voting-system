@@ -13,8 +13,9 @@ export class CreatePositionController extends ErrorHandlerControllers implements
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const body = httpContext.getRequest().body as { name: string, description: string };
+      const body = httpContext.getRequest().body as { name: string, description: string, electionId: string };
       const userCreateData = {
+        electionId: body.electionId ?? '',
         name: body.name ?? '',
         description: body.description ?? '',
       };
