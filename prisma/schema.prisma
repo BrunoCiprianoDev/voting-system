@@ -29,7 +29,6 @@ model Election {
   isActive    Boolean    @default(true)
   voter       Voter[]
   Position    Position[]
-  Vote        Vote[]
 
   @@map("elections")
 }
@@ -48,8 +47,6 @@ model Voter {
 
 model Vote {
   id          String    @id @default(uuid())
-  election    Election  @relation(fields: [electionId], references: [id])
-  electionId  String
   candidate   Candidate @relation(fields: [candidateId], references: [id])
   candidateId String
   voter       Voter     @relation(fields: [voterId], references: [id])
