@@ -3,7 +3,7 @@ import { ErrorHandlerServices } from '../../util/errors/handlerError';
 import { IVoter } from '../model/voter';
 import { IVoterRepository } from '../repository/voterRepository';
 
-export const ERROR_MSG_NOT_FOUND_VOTER_BY_REGISTRATION = 'Usuário não encontrado pelo ID';
+export const ERROR_MSG_NOT_FOUND_VOTER_BY_REGISTRATION = 'Usuário não encontrada pela matricula';
 
 export interface IFindVoterByRegistrationService {
   execute(registration: string): Promise<IVoter | null>;
