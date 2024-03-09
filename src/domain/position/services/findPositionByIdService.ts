@@ -1,16 +1,15 @@
-import { NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IPosition } from "../models/position";
-import { IPositionRepository } from "../repository/positionRepository";
+import { NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IPosition } from '../models/position';
+import { IPositionRepository } from '../repository/positionRepository';
 
 export const ERROR_MSG_POSITION_NOT_FOUND_BY_ID = 'Cargo não encontrado pelo ID';
 
 export interface IFindPositionByIdService {
-  execute(id: string): Promise<IPosition>
+  execute(id: string): Promise<IPosition>;
 }
 
 export class FindPositionByIdService extends ErrorHandlerServices implements IFindPositionByIdService {
-
   constructor(private positionRepository: IPositionRepository) {
     super();
   }
@@ -26,5 +25,4 @@ export class FindPositionByIdService extends ErrorHandlerServices implements IFi
       this.handleError(error);
     }
   }
-
 }

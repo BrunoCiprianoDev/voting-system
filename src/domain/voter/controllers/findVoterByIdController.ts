@@ -23,5 +23,3 @@ export class FindVoterByIdController extends ErrorHandlerControllers implements 
     }
   }
 }
-
-

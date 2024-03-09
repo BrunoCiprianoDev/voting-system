@@ -1,18 +1,17 @@
-import { BadRequestError, NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IPosition } from "../models/position";
-import { IPositionRepository } from "../repository/positionRepository";
+import { BadRequestError, NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IPosition } from '../models/position';
+import { IPositionRepository } from '../repository/positionRepository';
 
 export const ERROR_MSG_POSITION_NAME_INVALID = 'O atributo nome não pode estar vazio';
 export const ERROR_MSG_POSITION_DESCRIPTION_INVALID = 'O atributo descrição não pode estar vazio';
-export const ERROR_MSG_POSITION_NOT_FOUND = 'O cargo que está tentando alterar não foi encontrado'
+export const ERROR_MSG_POSITION_NOT_FOUND = 'O cargo que está tentando alterar não foi encontrado';
 
 export interface IUpdatePositionService {
-  execute(data: { name: string, description: string }): Promise<IPosition>;
+  execute(data: { name: string; description: string }): Promise<IPosition>;
 }
 
 export class UpdatePositionService extends ErrorHandlerServices implements IUpdatePositionService {
-
   constructor(private positionRespository: IPositionRepository) {
     super();
   }
@@ -31,13 +30,12 @@ export class UpdatePositionService extends ErrorHandlerServices implements IUpda
       }
       const updatePosition = {
         ...data,
-        electionId: isExists.election.id
-      }
+        electionId: isExists.election.id,
+      };
       await this.positionRespository.update(updatePosition);
       return data;
     } catch (error) {
       this.handleError(error);
     }
   }
-
 }

@@ -1,24 +1,23 @@
-import { IElectionRepository } from "../../election/repository/electionRepository";
-import { IuuidGenerator } from "../../util/adapters/uuidGenerator";
-import { BadRequestError, NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IPosition, IPositionCreateData } from "../models/position";
-import { IPositionRepository } from "../repository/positionRepository";
+import { IElectionRepository } from '../../election/repository/electionRepository';
+import { IuuidGenerator } from '../../util/adapters/uuidGenerator';
+import { BadRequestError, NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IPosition, IPositionCreateData } from '../models/position';
+import { IPositionRepository } from '../repository/positionRepository';
 
 export const ERROR_MSG_POSITION_NAME_INVALID = 'O atributo name não pode estar vazio';
 export const ERROR_MSG_POSITION_DESCRIPTION_INVALID = 'O atributo description não pode estar vazio';
-export const ERROR_MSG_ELECTION_ID_NOT_FOUND = 'Eleição inválida'
+export const ERROR_MSG_ELECTION_ID_NOT_FOUND = 'Eleição inválida';
 
 export interface ICreatePositionService {
   execute(data: IPositionCreateData): Promise<IPosition>;
 }
 
 export class CreatePositionService extends ErrorHandlerServices implements ICreatePositionService {
-
   constructor(
     private positionRespository: IPositionRepository,
     private electionRepository: IElectionRepository,
-    private uuidGenerator: IuuidGenerator
+    private uuidGenerator: IuuidGenerator,
   ) {
     super();
   }
@@ -39,7 +38,7 @@ export class CreatePositionService extends ErrorHandlerServices implements ICrea
       const newPosition = {
         ...data,
         election,
-        id
+        id,
       };
       await this.positionRespository.create(newPosition);
       return newPosition;
@@ -47,5 +46,4 @@ export class CreatePositionService extends ErrorHandlerServices implements ICrea
       this.handleError(error);
     }
   }
-
 }

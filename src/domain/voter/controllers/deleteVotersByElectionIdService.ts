@@ -6,7 +6,10 @@ export interface IDeleteVotersByElectionIdController {
   execute(httpContext: IHttpContext): Promise<void>;
 }
 
-export class DeleteVotersByElectionIdController extends ErrorHandlerControllers implements IDeleteVotersByElectionIdController {
+export class DeleteVotersByElectionIdController
+  extends ErrorHandlerControllers
+  implements IDeleteVotersByElectionIdController
+{
   constructor(private delecteVoterByElectionIdService: IDeleteVotersByElectionIdService) {
     super();
   }
@@ -23,5 +26,3 @@ export class DeleteVotersByElectionIdController extends ErrorHandlerControllers 
     }
   }
 }
-
-

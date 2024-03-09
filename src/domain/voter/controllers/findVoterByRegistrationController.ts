@@ -6,7 +6,10 @@ export interface IFindVoterByRegistrationController {
   execute(httpContext: IHttpContext): Promise<void>;
 }
 
-export class FindVoterByRegistrationController extends ErrorHandlerControllers implements IFindVoterByRegistrationController {
+export class FindVoterByRegistrationController
+  extends ErrorHandlerControllers
+  implements IFindVoterByRegistrationController
+{
   constructor(private findVoterByRegistrationService: IFindVoterByRegistrationService) {
     super();
   }
@@ -23,5 +26,3 @@ export class FindVoterByRegistrationController extends ErrorHandlerControllers i
     }
   }
 }
-
-

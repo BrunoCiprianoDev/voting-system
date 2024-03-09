@@ -28,4 +28,3 @@ candidateRoutes.get('/findByPositionId', (request: Request, response: Response) 
 candidateRoutes.delete('/', authAdminMiddleware, (request: Request, response: Response) => {
   deleteCandidateFactory().execute(new ExpressHttpContext(request, response));
 });
-

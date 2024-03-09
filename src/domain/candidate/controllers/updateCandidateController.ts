@@ -27,5 +27,3 @@ export class UpdateCandidateController extends ErrorHandlerControllers implement
     }
   }
 }
-
-

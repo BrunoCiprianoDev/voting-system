@@ -1,9 +1,9 @@
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IPosition } from "../models/position";
-import { IPositionRepository } from "../repository/positionRepository";
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IPosition } from '../models/position';
+import { IPositionRepository } from '../repository/positionRepository';
 
 export interface IFindAllPositionsService {
-  execute(data: { contains: string, page: number, size: number }): Promise<IPosition[]>;
+  execute(data: { contains: string; page: number; size: number }): Promise<IPosition[]>;
 }
 
 export class FindAllPositionsService extends ErrorHandlerServices implements IFindAllPositionsService {
@@ -11,7 +11,7 @@ export class FindAllPositionsService extends ErrorHandlerServices implements IFi
     super();
   }
 
-  public async execute(data: { contains: string; page: number; size: number; }): Promise<IPosition[]> {
+  public async execute(data: { contains: string; page: number; size: number }): Promise<IPosition[]> {
     try {
       return await this.positionRepository.findAll(data);
     } catch (error) {

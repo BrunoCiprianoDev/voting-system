@@ -1,23 +1,25 @@
-import { IListVoters, IVoter } from "../../../../domain/voter/model/voter";
-import { IVoterRepository } from "../../../../domain/voter/repository/voterRepository";
-import BaseRepositoryPrisma from "./baseRepositoryPrisma";
+import { IListVoters, IVoter } from '../../../../domain/voter/model/voter';
+import { IVoterRepository } from '../../../../domain/voter/repository/voterRepository';
+import BaseRepositoryPrisma from './baseRepositoryPrisma';
 
 export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVoterRepository {
   constructor() {
     super();
   }
 
-  public async create(voters: { id: string, name: string, email: string, registration: string, electionId: string }[]): Promise<void> {
+  public async create(
+    voters: { id: string; name: string; email: string; registration: string; electionId: string }[],
+  ): Promise<void> {
     try {
-      await this.dbClientInstance.voter.createMany({ data: voters })
+      await this.dbClientInstance.voter.createMany({ data: voters });
     } catch (error) {
       this.handleError(error);
     }
   }
 
-  public async updateEmail({ id, email }: { id: string, email: string }): Promise<void> {
+  public async updateEmail({ id, email }: { id: string; email: string }): Promise<void> {
     try {
-      await this.dbClientInstance.voter.update({ where: { id }, data: { email } })
+      await this.dbClientInstance.voter.update({ where: { id }, data: { email } });
     } catch (error) {
       this.handleError(error);
     }
@@ -26,31 +28,38 @@ export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVote
   public async findById(id: string): Promise<IVoter | null> {
     try {
       return this.dbClientInstance.voter.findUnique({
-        where: { id }, include: {
-          election: true
-        }
-      })
+        where: { id },
+        include: {
+          election: true,
+        },
+      });
     } catch (error) {
       this.handleError(error);
     }
   }
 
-  public async findAll({ page, size, contains }: { page: number, size: number, contains: string }): Promise<IListVoters[]> {
+  public async findAll({
+    page,
+    size,
+    contains,
+  }: {
+    page: number;
+    size: number;
+    contains: string;
+  }): Promise<IListVoters[]> {
     try {
-      return await this.dbClientInstance.voter.findMany(
-        {
-          where: {
-            name: {
-              contains,
-            },
+      return await this.dbClientInstance.voter.findMany({
+        where: {
+          name: {
+            contains,
           },
-          skip: (page - 1) * size,
-          take: +size,
-          include: {
-            election: false
-          }
-        }
-      )
+        },
+        skip: (page - 1) * size,
+        take: +size,
+        include: {
+          election: false,
+        },
+      });
     } catch (error) {
       this.handleError(error);
     }
@@ -59,10 +68,11 @@ export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVote
   public async findByRegistration(registration: string): Promise<IVoter | null> {
     try {
       return this.dbClientInstance.voter.findFirst({
-        where: { registration }, include: {
-          election: true
-        }
-      })
+        where: { registration },
+        include: {
+          election: true,
+        },
+      });
     } catch (error) {
       this.handleError(error);
     }
@@ -70,7 +80,7 @@ export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVote
 
   public async deleteByElectionId(electionId: string): Promise<void> {
     try {
-      await this.dbClientInstance.voter.deleteMany({ where: { electionId } })
+      await this.dbClientInstance.voter.deleteMany({ where: { electionId } });
     } catch (error) {
       this.handleError(electionId);
     }

@@ -1,18 +1,17 @@
-import { IPositionRepository } from "../../position/repository/positionRepository";
-import { BadRequestError, NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { ICandidate, ICandidateUpdateData } from "../models/candidate";
-import { ICandidateRepository } from "../repository/candidateRepository";
+import { IPositionRepository } from '../../position/repository/positionRepository';
+import { BadRequestError, NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { ICandidate, ICandidateUpdateData } from '../models/candidate';
+import { ICandidateRepository } from '../repository/candidateRepository';
 
-export const ERROR_MSG_INVALID_CANDIDATE_NAME = 'Nome inválido para o candidato'
-export const ERROR_MSG_INVALID_CANDIDATE_POSITION_ID = 'Cargo inválido'
+export const ERROR_MSG_INVALID_CANDIDATE_NAME = 'Nome inválido para o candidato';
+export const ERROR_MSG_INVALID_CANDIDATE_POSITION_ID = 'Cargo inválido';
 
 export interface IUpdateCandidateService {
   execute(candidate: ICandidateUpdateData): Promise<ICandidate>;
 }
 
 export class UpdateCandidateService extends ErrorHandlerServices implements IUpdateCandidateService {
-
   constructor(
     private candidateRepository: ICandidateRepository,
     private positionRepository: IPositionRepository,
@@ -32,13 +31,12 @@ export class UpdateCandidateService extends ErrorHandlerServices implements IUpd
       const candidateUpdate = {
         name: candidate.name,
         position,
-        id: candidate.id
-      }
+        id: candidate.id,
+      };
       await this.candidateRepository.update(candidateUpdate);
       return candidateUpdate;
     } catch (error) {
       this.handleError(error);
     }
   }
-
 }

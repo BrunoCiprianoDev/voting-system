@@ -23,5 +23,3 @@ export class DeleteCandidateController extends ErrorHandlerControllers implement
     }
   }
 }
-
-

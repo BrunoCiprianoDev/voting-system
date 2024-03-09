@@ -23,5 +23,3 @@ export class FindCandidateByIdController extends ErrorHandlerControllers impleme
     }
   }
 }
-
-

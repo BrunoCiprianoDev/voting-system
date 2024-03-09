@@ -23,5 +23,3 @@ export class DeleteElectionController extends ErrorHandlerControllers implements
     }
   }
 }
-
-

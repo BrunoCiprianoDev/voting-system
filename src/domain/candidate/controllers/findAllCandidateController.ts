@@ -13,7 +13,7 @@ export class FindAllCandidatesController extends ErrorHandlerControllers impleme
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const query = httpContext.getRequest().query as { page: number, size: number, contains: string } ?? null;
+      const query = (httpContext.getRequest().query as { page: number; size: number; contains: string }) ?? null;
       const data = {
         page: query?.page ?? 1,
         size: query?.size ?? 5,

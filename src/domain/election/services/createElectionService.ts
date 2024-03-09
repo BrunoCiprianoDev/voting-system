@@ -1,8 +1,8 @@
-import { IElectionRepository } from "../repository/electionRepository";
-import { IuuidGenerator } from "../../util/adapters/uuidGenerator";
-import { BadRequestError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IElection, IElectionCreateData } from "../models/election";
+import { IElectionRepository } from '../repository/electionRepository';
+import { IuuidGenerator } from '../../util/adapters/uuidGenerator';
+import { BadRequestError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IElection, IElectionCreateData } from '../models/election';
 
 export const ERROR_MSG_ELECTION_TITLE_INVALID = 'O atributo titulo não pode estar vazio';
 export const ERROR_MSG_ELECTION_DESCRIPTION_INVALID = 'O atributo descrição não pode estar vazio';
@@ -12,10 +12,9 @@ export interface ICreateElectionService {
 }
 
 export class CreateElectionService extends ErrorHandlerServices implements ICreateElectionService {
-
   constructor(
     private electionRepository: IElectionRepository,
-    private uuidGenerator: IuuidGenerator
+    private uuidGenerator: IuuidGenerator,
   ) {
     super();
   }
@@ -31,7 +30,7 @@ export class CreateElectionService extends ErrorHandlerServices implements ICrea
       const id = await this.uuidGenerator.generate();
       const newPosition = {
         ...data,
-        id
+        id,
       };
       await this.electionRepository.create(newPosition);
       return newPosition;
@@ -39,5 +38,4 @@ export class CreateElectionService extends ErrorHandlerServices implements ICrea
       this.handleError(error);
     }
   }
-
 }

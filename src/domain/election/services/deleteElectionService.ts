@@ -1,6 +1,6 @@
-import { NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IElectionRepository } from "../repository/electionRepository";
+import { NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IElectionRepository } from '../repository/electionRepository';
 
 export const ERROR_MSG_NOT_FOUND_ELECTION_BY_DELETED = 'Id não encontrado';
 
@@ -24,5 +24,4 @@ export class deleteElectionService extends ErrorHandlerServices implements IDele
       this.handleError(error);
     }
   }
-
 }

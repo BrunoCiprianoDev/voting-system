@@ -1,16 +1,15 @@
-import { NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { ICandidate } from "../models/candidate";
-import { ICandidateRepository } from "../repository/candidateRepository";
+import { NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { ICandidate } from '../models/candidate';
+import { ICandidateRepository } from '../repository/candidateRepository';
 
-export const ERROR_MSG_CANDIDATE_NOT_FOUND = 'O candidato que está tentando buscar não foi encontrado'
+export const ERROR_MSG_CANDIDATE_NOT_FOUND = 'O candidato que está tentando buscar não foi encontrado';
 
 export interface IFindCandidateByIdService {
   execute(id: string): Promise<ICandidate>;
 }
 
 export class FindCandidateByIdService extends ErrorHandlerServices implements IFindCandidateByIdService {
-
   constructor(private candidateRepository: ICandidateRepository) {
     super();
   }
@@ -26,5 +25,4 @@ export class FindCandidateByIdService extends ErrorHandlerServices implements IF
       this.handleError(error);
     }
   }
-
 }

@@ -18,7 +18,7 @@ export class FindAllPositionsController extends ErrorHandlerControllers implemen
         page: query?.page ?? 1,
         size: query?.size ?? 5,
         contains: query?.contains ?? '',
-      } as { page: number, size: number, contains: string };
+      } as { page: number; size: number; contains: string };
       const result = await this.findAllPositionsService.execute(findAllPositionsData);
       httpContext.send({ statusCode: 200, body: result });
     } catch (error) {
@@ -26,4 +26,3 @@ export class FindAllPositionsController extends ErrorHandlerControllers implemen
     }
   }
 }
-

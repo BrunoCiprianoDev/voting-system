@@ -1,4 +1,4 @@
-import { IElection } from "../../election/models/election";
+import { IElection } from '../../election/models/election';
 
 export interface IVoter {
   id: string;
@@ -9,14 +9,18 @@ export interface IVoter {
 
 export interface IVoterCreateData {
   electionId: string;
-  voters: [{
-    registration: string
-    name: string,
-  }]
+  voters: [
+    {
+      registration: string;
+      name: string;
+    },
+  ];
 }
 
-export interface IListVoters { id: string, name: string, email: string, registration: string, electionId: string }
-
-
-
-
+export interface IListVoters {
+  id: string;
+  name: string;
+  email: string;
+  registration: string;
+  electionId: string;
+}

@@ -1,12 +1,11 @@
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IVoterRepository } from "../repository/voterRepository";
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IVoterRepository } from '../repository/voterRepository';
 
 export interface IDeleteVotersByElectionIdService {
-  execute(electionId: string): Promise<void>
+  execute(electionId: string): Promise<void>;
 }
 
 export class DeleteVotersByElectionIdService extends ErrorHandlerServices implements IDeleteVotersByElectionIdService {
-
   constructor(private voterRepository: IVoterRepository) {
     super();
   }
@@ -18,5 +17,4 @@ export class DeleteVotersByElectionIdService extends ErrorHandlerServices implem
       this.handleError(error);
     }
   }
-
 }

@@ -17,7 +17,7 @@ export class CreateCandidateController extends ErrorHandlerControllers implement
       const body = httpContext.getRequest().body as ICandidateCreateData;
       const candidateCreateData = {
         name: body.name ?? '',
-        positionId: body.positionId ?? ''
+        positionId: body.positionId ?? '',
       };
       const result = await this.createCandidateService.execute(candidateCreateData);
       httpContext.send({ statusCode: 201, body: result });
@@ -26,4 +26,3 @@ export class CreateCandidateController extends ErrorHandlerControllers implement
     }
   }
 }
-

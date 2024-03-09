@@ -1,11 +1,11 @@
-import { Router } from "express";
-import { createPositionFactory } from "../factories/position/createPositionFactory";
-import { ExpressHttpContext } from "../../../../shared/expressHttpContext";
+import { Router } from 'express';
+import { createPositionFactory } from '../factories/position/createPositionFactory';
+import { ExpressHttpContext } from '../../../../shared/expressHttpContext';
 import { Request, Response } from 'express';
-import { updatePositionFactory } from "../factories/position/updatePositionFactory";
-import { findAllPositionFactory } from "../factories/position/findAllPositionFactory";
-import { findPositionByIdFactory } from "../factories/position/findPostionByIdFactory";
-import { authAdminMiddleware } from "../middlewares/authAdminMiddleware";
+import { updatePositionFactory } from '../factories/position/updatePositionFactory';
+import { findAllPositionFactory } from '../factories/position/findAllPositionFactory';
+import { findPositionByIdFactory } from '../factories/position/findPostionByIdFactory';
+import { authAdminMiddleware } from '../middlewares/authAdminMiddleware';
 
 export const positionRouter = Router();
 
@@ -25,5 +25,3 @@ positionRouter.get('/findAll', (request: Request, response: Response) => {
 positionRouter.delete('/', authAdminMiddleware, (request: Request, response: Response) => {
   findPositionByIdFactory().execute(new ExpressHttpContext(request, response));
 });
-
-

@@ -13,13 +13,18 @@ export class UpdateElectionController extends ErrorHandlerControllers implements
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const body = httpContext.getRequest().body as { id: string, title: string, description: string, isActive: string };
+      const body = httpContext.getRequest().body as {
+        id: string;
+        title: string;
+        description: string;
+        isActive: string;
+      };
       const isActive = body.isActive === 'false' ? false : true;
       const userUpdateData = {
         id: body.id ?? '',
         title: body.title ?? '',
         description: body.description ?? '',
-        isActive
+        isActive,
       };
       const result = await this.updateElectionService.execute(userUpdateData);
       httpContext.send({ statusCode: 200, body: result });
@@ -28,5 +33,3 @@ export class UpdateElectionController extends ErrorHandlerControllers implements
     }
   }
 }
-
-

@@ -1,6 +1,6 @@
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IElection } from "../models/election";
-import { IElectionRepository } from "../repository/electionRepository";
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IElection } from '../models/election';
+import { IElectionRepository } from '../repository/electionRepository';
 
 export interface IFindAllElectionsService {
   execute(isActive: boolean): Promise<IElection[]>;

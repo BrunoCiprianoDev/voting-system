@@ -1,9 +1,8 @@
-import { ICandidate } from "../../../../domain/candidate/models/candidate";
-import { ICandidateRepository } from "../../../../domain/candidate/repository/candidateRepository";
-import BaseRepositoryPrisma from "./baseRepositoryPrisma";
+import { ICandidate } from '../../../../domain/candidate/models/candidate';
+import { ICandidateRepository } from '../../../../domain/candidate/repository/candidateRepository';
+import BaseRepositoryPrisma from './baseRepositoryPrisma';
 
 export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements ICandidateRepository {
-
   constructor() {
     super();
   }
@@ -12,8 +11,11 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
     try {
       await this.dbClientInstance.candidate.create({
         data: {
-          id, name, positionId: position.id, votes
-        }
+          id,
+          name,
+          positionId: position.id,
+          votes,
+        },
       });
     } catch (error) {
       this.handleError(error);
@@ -25,8 +27,10 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
       await this.dbClientInstance.candidate.update({
         where: { id },
         data: {
-          name, positionId: position.id, votes
-        }
+          name,
+          positionId: position.id,
+          votes,
+        },
       });
     } catch (error) {
       this.handleError(error);
@@ -40,10 +44,10 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
         include: {
           position: {
             include: {
-              election: true
-            }
-          }
-        }
+              election: true,
+            },
+          },
+        },
       });
     } catch (error) {
       this.handleError(error);
@@ -53,21 +57,29 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
     try {
       return await this.dbClientInstance.candidate.findMany({
         where: {
-          position: { id: positionId }
+          position: { id: positionId },
         },
         include: {
           position: {
             include: {
-              election: true
-            }
-          }
-        }
-      })
+              election: true,
+            },
+          },
+        },
+      });
     } catch (error) {
       this.handleError(error);
     }
   }
-  public async findAll({ page, size, contains }: { page: number, size: number, contains: string }): Promise<ICandidate[]> {
+  public async findAll({
+    page,
+    size,
+    contains,
+  }: {
+    page: number;
+    size: number;
+    contains: string;
+  }): Promise<ICandidate[]> {
     try {
       return await this.dbClientInstance.candidate.findMany({
         where: {
@@ -80,10 +92,10 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
         include: {
           position: {
             include: {
-              election: true
-            }
-          }
-        }
+              election: true,
+            },
+          },
+        },
       });
     } catch (error) {
       this.handleError(error);
@@ -91,11 +103,9 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
   }
   public async delete(id: string): Promise<void> {
     try {
-      await this.dbClientInstance.candidate.delete({ where: { id } })
+      await this.dbClientInstance.candidate.delete({ where: { id } });
     } catch (error) {
       this.handleError(error);
     }
   }
-
-
 }

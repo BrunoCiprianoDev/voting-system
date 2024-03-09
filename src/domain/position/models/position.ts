@@ -1,4 +1,4 @@
-import { IElection } from "../../election/models/election";
+import { IElection } from '../../election/models/election';
 
 export interface IPosition {
   id: string;
@@ -12,4 +12,3 @@ export interface IPositionCreateData {
   description: string;
   electionId: string;
 }
-

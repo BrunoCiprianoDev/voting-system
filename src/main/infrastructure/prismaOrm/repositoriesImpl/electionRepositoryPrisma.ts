@@ -9,16 +9,15 @@ export class ElectionRepositoryPrisma extends BaseRepositoryPrisma implements IE
 
   public async create(election: IElection): Promise<void> {
     try {
-      await this.dbClientInstance.election.create({ data: election })
+      await this.dbClientInstance.election.create({ data: election });
     } catch (error) {
       this.handleError(error);
     }
   }
 
-
   public async update(election: IElection): Promise<void> {
     try {
-      await this.dbClientInstance.election.update({ where: { id: election.id }, data: election })
+      await this.dbClientInstance.election.update({ where: { id: election.id }, data: election });
     } catch (error) {
       this.handleError(error);
     }
@@ -28,8 +27,8 @@ export class ElectionRepositoryPrisma extends BaseRepositoryPrisma implements IE
     try {
       return await this.dbClientInstance.election.findMany({
         where: {
-          isActive
-        }
+          isActive,
+        },
       });
     } catch (error) {
       this.handleError(error);
@@ -51,7 +50,4 @@ export class ElectionRepositoryPrisma extends BaseRepositoryPrisma implements IE
       this.handleError(error);
     }
   }
-
-
-
 }

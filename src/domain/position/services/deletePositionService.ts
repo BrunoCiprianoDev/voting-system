@@ -1,6 +1,6 @@
-import { NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { IPositionRepository } from "../repository/positionRepository";
+import { NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { IPositionRepository } from '../repository/positionRepository';
 
 export const ERROR_MSG_NOT_FOUND_POSITION_BY_DELETED = 'Id não encontrado';
 
@@ -24,5 +24,4 @@ export class deletePositionService extends ErrorHandlerServices implements IDele
       this.handleError(error);
     }
   }
-
 }

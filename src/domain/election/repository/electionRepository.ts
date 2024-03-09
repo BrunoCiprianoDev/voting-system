@@ -1,4 +1,4 @@
-import { IElection } from "../models/election";
+import { IElection } from '../models/election';
 
 export interface IElectionRepository {
   create(election: IElection): Promise<void>;

@@ -23,5 +23,3 @@ export class FindPositionByIdController extends ErrorHandlerControllers implemen
     }
   }
 }
-
-

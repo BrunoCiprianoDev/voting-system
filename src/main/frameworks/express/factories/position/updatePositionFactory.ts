@@ -1,6 +1,6 @@
-import { UpdatePositionController } from "../../../../../domain/position/controller/updatePositionController";
-import { UpdatePositionService } from "../../../../../domain/position/services/updatePositionService";
-import { PositionRepositoryPrisma } from "../../../../infrastructure/prismaOrm/repositoriesImpl/positionRepositoryPrisma";
+import { UpdatePositionController } from '../../../../../domain/position/controller/updatePositionController';
+import { UpdatePositionService } from '../../../../../domain/position/services/updatePositionService';
+import { PositionRepositoryPrisma } from '../../../../infrastructure/prismaOrm/repositoriesImpl/positionRepositoryPrisma';
 
 export function updatePositionFactory() {
   const positionRepository = new PositionRepositoryPrisma();

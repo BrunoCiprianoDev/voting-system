@@ -23,5 +23,3 @@ export class DeletePositionController extends ErrorHandlerControllers implements
     }
   }
 }
-
-

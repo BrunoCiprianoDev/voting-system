@@ -23,5 +23,3 @@ export class FindElectionByIdController extends ErrorHandlerControllers implemen
     }
   }
 }
-
-

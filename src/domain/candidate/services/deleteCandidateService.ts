@@ -1,15 +1,14 @@
-import { NotFoundError } from "../../util/errors/appErrors";
-import { ErrorHandlerServices } from "../../util/errors/handlerError";
-import { ICandidateRepository } from "../repository/candidateRepository";
+import { NotFoundError } from '../../util/errors/appErrors';
+import { ErrorHandlerServices } from '../../util/errors/handlerError';
+import { ICandidateRepository } from '../repository/candidateRepository';
 
-export const ERROR_MSG_CANDIDATE_NOT_FOUND = 'O candidato que está tentando deletar não foi encontrado'
+export const ERROR_MSG_CANDIDATE_NOT_FOUND = 'O candidato que está tentando deletar não foi encontrado';
 
 export interface IDeleteCandidateService {
   execute(id: string): Promise<void>;
 }
 
 export class DeleteCandidateService extends ErrorHandlerServices implements IDeleteCandidateService {
-
   constructor(private candidateRepository: ICandidateRepository) {
     super();
   }
@@ -25,5 +24,4 @@ export class DeleteCandidateService extends ErrorHandlerServices implements IDel
       this.handleError(error);
     }
   }
-
 }

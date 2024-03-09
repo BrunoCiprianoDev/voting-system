@@ -1,9 +1,8 @@
-import { IPosition } from "../../../../domain/position/models/position";
-import { IPositionRepository } from "../../../../domain/position/repository/positionRepository";
-import BaseRepositoryPrisma from "./baseRepositoryPrisma";
+import { IPosition } from '../../../../domain/position/models/position';
+import { IPositionRepository } from '../../../../domain/position/repository/positionRepository';
+import BaseRepositoryPrisma from './baseRepositoryPrisma';
 
 export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IPositionRepository {
-
   constructor() {
     super();
   }
@@ -15,10 +14,9 @@ export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IP
           id,
           name,
           description,
-          electionId: election.id
+          electionId: election.id,
         },
-      })
-
+      });
     } catch (error) {
       this.handleError(error);
     }
@@ -28,9 +26,8 @@ export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IP
     try {
       await this.dbClientInstance.position.update({
         where: { id },
-        data: { name, description }
-      })
-
+        data: { name, description },
+      });
     } catch (error) {
       this.handleError(error);
     }
@@ -40,15 +37,22 @@ export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IP
     try {
       return await this.dbClientInstance.position.findUnique({
         where: { id },
-        include: { election: true }
-      })
-
+        include: { election: true },
+      });
     } catch (error) {
       this.handleError(error);
     }
   }
 
-  public async findAll({ page, size, contains }: { page: number, size: number, contains: string }): Promise<IPosition[]> {
+  public async findAll({
+    page,
+    size,
+    contains,
+  }: {
+    page: number;
+    size: number;
+    contains: string;
+  }): Promise<IPosition[]> {
     try {
       return await this.dbClientInstance.position.findMany({
         where: {
@@ -62,7 +66,7 @@ export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IP
           id: true,
           name: true,
           description: true,
-          election: true
+          election: true,
         },
       });
     } catch (error) {
@@ -74,11 +78,9 @@ export class PositionRepositoryPrisma extends BaseRepositoryPrisma implements IP
     try {
       await this.dbClientInstance.position.delete({
         where: { id },
-      })
-
+      });
     } catch (error) {
       this.handleError(error);
     }
   }
-
 }

@@ -1,6 +1,6 @@
-import { FindAllElectionsController } from "../../../../../domain/election/controller/findAllElectionsController";
-import { FindAllElectionsService } from "../../../../../domain/election/services/findAllElectionsService";
-import { ElectionRepositoryPrisma } from "../../../../infrastructure/prismaOrm/repositoriesImpl/electionRepositoryPrisma";
+import { FindAllElectionsController } from '../../../../../domain/election/controller/findAllElectionsController';
+import { FindAllElectionsService } from '../../../../../domain/election/services/findAllElectionsService';
+import { ElectionRepositoryPrisma } from '../../../../infrastructure/prismaOrm/repositoriesImpl/electionRepositoryPrisma';
 
 export function findAllElectionFactory() {
   const electionRepository = new ElectionRepositoryPrisma();
