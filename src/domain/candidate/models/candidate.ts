@@ -3,7 +3,6 @@ import { IPosition } from "../../position/models/position";
 export interface ICandidate {
   id: string,
   name: string,
-  votes: number,
   position: IPosition,
 }
 

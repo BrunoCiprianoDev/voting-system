@@ -32,7 +32,6 @@ export class UpdateCandidateService extends ErrorHandlerServices implements IUpd
       const candidateUpdate = {
         name: candidate.name,
         position,
-        votes: 0,
         id: candidate.id
       }
       await this.candidateRepository.update(candidateUpdate);

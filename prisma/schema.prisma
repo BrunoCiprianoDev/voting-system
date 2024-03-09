@@ -36,6 +36,7 @@ model Election {
 model Voter {
   id           String   @id @default(uuid())
   registration String
+  name         String
   email        String
   election     Election @relation(fields: [electionId], references: [id])
   electionId   String
@@ -57,7 +58,6 @@ model Position {
 model Candidate {
   id         String   @id @default(uuid())
   name       String
-  votes      Int
   position   Position @relation(fields: [positionId], references: [id])
   positionId String
 

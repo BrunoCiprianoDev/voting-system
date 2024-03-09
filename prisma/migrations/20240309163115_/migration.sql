@@ -22,6 +22,7 @@ CREATE TABLE "elections" (
 CREATE TABLE "voters" (
     "id" TEXT NOT NULL,
     "registration" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "electionId" TEXT NOT NULL,
 
@@ -42,7 +43,6 @@ CREATE TABLE "positions" (
 CREATE TABLE "candidates" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "votes" INTEGER NOT NULL,
     "positionId" TEXT NOT NULL,
 
     CONSTRAINT "candidates_pkey" PRIMARY KEY ("id")

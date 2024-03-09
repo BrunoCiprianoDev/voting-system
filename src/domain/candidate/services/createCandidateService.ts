@@ -36,7 +36,6 @@ export class CreateCandidateService extends ErrorHandlerServices implements ICre
       const candidateCreate = {
         name: candidate.name,
         position,
-        votes: 0,
         id
       }
       await this.candidateRepository.create(candidateCreate);
