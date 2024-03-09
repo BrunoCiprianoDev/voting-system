@@ -1,4 +1,3 @@
-
 import { IElection } from '../../../../domain/election/models/election';
 import { IElectionRepository } from '../../../../domain/election/repository/electionRepository';
 import BaseRepositoryPrisma from './baseRepositoryPrisma';
@@ -25,9 +24,13 @@ export class ElectionRepositoryPrisma extends BaseRepositoryPrisma implements IE
     }
   }
 
-  public async findAll(): Promise<IElection[]> {
+  public async findAll(isActive: boolean): Promise<IElection[]> {
     try {
-      return await this.dbClientInstance.election.findMany({});
+      return await this.dbClientInstance.election.findMany({
+        where: {
+          isActive
+        }
+      });
     } catch (error) {
       this.handleError(error);
     }

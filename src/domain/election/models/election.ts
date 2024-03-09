@@ -2,7 +2,7 @@ export interface IElection {
   id: string,
   title: string,
   description: string,
-  isDeleted: boolean
+  isActive: boolean
 }
 
 export interface IElectionCreateData extends Omit<IElection, 'id'> { }

@@ -3,7 +3,7 @@ import { IElection } from "../models/election";
 import { IElectionRepository } from "../repository/electionRepository";
 
 export interface IFindAllElectionsService {
-  execute(): Promise<IElection[]>;
+  execute(isActive: boolean): Promise<IElection[]>;
 }
 
 export class FindAllElectionsService extends ErrorHandlerServices implements IFindAllElectionsService {
@@ -11,9 +11,9 @@ export class FindAllElectionsService extends ErrorHandlerServices implements IFi
     super();
   }
 
-  public async execute(): Promise<IElection[]> {
+  public async execute(isActive: boolean): Promise<IElection[]> {
     try {
-      return await this.electionRepository.findAll();
+      return await this.electionRepository.findAll(isActive);
     } catch (error) {
       this.handleError(error);
     }

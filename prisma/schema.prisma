@@ -23,13 +23,12 @@ model User {
 }
 
 model Election {
-  id          String      @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String
-  isDeleted   Boolean     @default(true)
+  isActive    Boolean    @default(true)
   voter       Voter[]
   Position    Position[]
-  candidate   Candidate[]
 
   @@map("elections")
 }
@@ -58,10 +57,9 @@ model Position {
 model Candidate {
   id         String   @id @default(uuid())
   name       String
-  Position   Position @relation(fields: [positionId], references: [id])
-  election   Election @relation(fields: [electionId], references: [id])
+  votes      Int
+  position   Position @relation(fields: [positionId], references: [id])
   positionId String
-  electionId String
 
   @@map("candidates")
 }

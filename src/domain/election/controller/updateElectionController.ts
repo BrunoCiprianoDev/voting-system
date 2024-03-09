@@ -1,6 +1,5 @@
 import { IHttpContext } from '../../util/adapters/httpContext';
 import { ErrorHandlerControllers } from '../../util/errors/handlerError';
-import { IElection } from '../models/election';
 import { IUpdateElectionService } from '../services/updateElectionService';
 
 export interface IUpdateElectionController {
@@ -14,12 +13,13 @@ export class UpdateElectionController extends ErrorHandlerControllers implements
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const body = httpContext.getRequest().body as IElection;
+      const body = httpContext.getRequest().body as { id: string, title: string, description: string, isActive: string };
+      const isActive = body.isActive === 'false' ? false : true;
       const userUpdateData = {
         id: body.id ?? '',
         title: body.title ?? '',
         description: body.description ?? '',
-        isDeleted: body.isDeleted ?? ''
+        isActive
       };
       const result = await this.updateElectionService.execute(userUpdateData);
       httpContext.send({ statusCode: 200, body: result });

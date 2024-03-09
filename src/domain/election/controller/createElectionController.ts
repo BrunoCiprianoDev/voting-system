@@ -17,7 +17,7 @@ export class CreateElectionController extends ErrorHandlerControllers implements
       const electionCreateData = {
         title: body.title ?? '',
         description: body.description ?? '',
-        isDeleted: false
+        isActive: true
       };
       const result = await this.createElectionService.execute(electionCreateData);
       httpContext.send({ statusCode: 201, body: result });

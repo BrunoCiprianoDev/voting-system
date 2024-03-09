@@ -1,25 +1,19 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" TEXT NOT NULL,
 
-  - You are about to drop the `Candidate` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Position` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Voter` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "Candidate";
-
--- DropTable
-DROP TABLE "Position";
-
--- DropTable
-DROP TABLE "Voter";
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "elections" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "decription" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "elections_pkey" PRIMARY KEY ("id")
 );
@@ -29,6 +23,7 @@ CREATE TABLE "voters" (
     "id" TEXT NOT NULL,
     "registration" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "electionId" TEXT NOT NULL,
 
     CONSTRAINT "voters_pkey" PRIMARY KEY ("id")
 );
@@ -38,6 +33,7 @@ CREATE TABLE "positions" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "electionId" TEXT NOT NULL,
 
     CONSTRAINT "positions_pkey" PRIMARY KEY ("id")
 );
@@ -46,16 +42,20 @@ CREATE TABLE "positions" (
 CREATE TABLE "candidates" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "votes" INTEGER NOT NULL,
     "positionId" TEXT NOT NULL,
 
     CONSTRAINT "candidates_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "voters_registration_key" ON "voters"("registration");
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
--- CreateIndex
-CREATE UNIQUE INDEX "voters_email_key" ON "voters"("email");
+-- AddForeignKey
+ALTER TABLE "voters" ADD CONSTRAINT "voters_electionId_fkey" FOREIGN KEY ("electionId") REFERENCES "elections"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "positions" ADD CONSTRAINT "positions_electionId_fkey" FOREIGN KEY ("electionId") REFERENCES "elections"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "candidates" ADD CONSTRAINT "candidates_positionId_fkey" FOREIGN KEY ("positionId") REFERENCES "positions"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

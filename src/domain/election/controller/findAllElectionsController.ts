@@ -13,7 +13,9 @@ export class FindAllElectionsController extends ErrorHandlerControllers implemen
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const result = await this.findAllElectionsService.execute();
+      const query = httpContext.getRequest().query ?? null;
+      const isActive = query?.isActive === 'false' ? false : true;
+      const result = await this.findAllElectionsService.execute(isActive);
       httpContext.send({ statusCode: 200, body: result });
     } catch (error) {
       httpContext.send(this.handleClientErrors(error));
