@@ -38,6 +38,19 @@ export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVote
     }
   }
 
+  public async findByEmail(email: string): Promise<IVoter | null> {
+    try {
+      return this.dbClientInstance.voter.findFirst({
+        where: { email },
+        include: {
+          election: true,
+        },
+      });
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
   public async findAll({
     page,
     size,

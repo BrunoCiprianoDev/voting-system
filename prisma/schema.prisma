@@ -41,6 +41,7 @@ model Voter {
   election     Election @relation(fields: [electionId], references: [id])
   electionId   String
   Vote         Vote[]
+  alreadyVoted Boolean  @default(false)
 
   @@map("voters")
 }

@@ -29,6 +29,27 @@ export class TokenGenerator implements ITokenGenerator {
     }
   }
 
+  public async getVoterToken(voterId: string): Promise<string> {
+    try {
+      const token = sign(
+        {
+          voterId
+        },
+        process.env.TOKEN_VOTER_SECRET as string,
+        {
+          subject: voterId,
+          expiresIn: process.env.TOKEN_VOTER_EXPIRES_IN,
+        },
+      );
+      return token;
+    } catch (error) {
+      if (error instanceof Error) {
+        logger.error('[generateAuthToken] ' + error.message);
+      }
+      throw error;
+    }
+  }
+
   public async getPayloadAuthToken(token: string): Promise<{ id: string; role: string }> {
     try {
       const payload = verify(token, process.env.TOKEN_PAYLOAD_SECRET as string) as { id: string; role: string };
@@ -62,6 +83,15 @@ export class TokenGenerator implements ITokenGenerator {
   public async getPayloadTokenResetPass(token: string): Promise<IUserPublicData> {
     try {
       const payload = verify(token, process.env.TOKEN_FORGOT_PASS_SECRET as string) as IUserPublicData;
+      return payload;
+    } catch (error) {
+      throw new BadRequestError(ERROR_MESSAGE_INVALID_TOKEN_RESET_MESSAGE);
+    }
+  }
+
+  public async getPayloadVoterToken(token: string): Promise<string> {
+    try {
+      const payload = verify(token, process.env.TOKEN_VOTER_SECRET as string) as string;
       return payload;
     } catch (error) {
       throw new BadRequestError(ERROR_MESSAGE_INVALID_TOKEN_RESET_MESSAGE);

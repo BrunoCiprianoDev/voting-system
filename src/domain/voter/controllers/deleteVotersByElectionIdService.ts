@@ -8,8 +8,7 @@ export interface IDeleteVotersByElectionIdController {
 
 export class DeleteVotersByElectionIdController
   extends ErrorHandlerControllers
-  implements IDeleteVotersByElectionIdController
-{
+  implements IDeleteVotersByElectionIdController {
   constructor(private delecteVoterByElectionIdService: IDeleteVotersByElectionIdService) {
     super();
   }
@@ -20,7 +19,7 @@ export class DeleteVotersByElectionIdController
 
       const result = await this.delecteVoterByElectionIdService.execute(electionId);
 
-      httpContext.send({ statusCode: 200, body: result });
+      httpContext.send({ statusCode: 204, body: result });
     } catch (error) {
       httpContext.send(this.handleClientErrors(error));
     }

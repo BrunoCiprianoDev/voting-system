@@ -1,7 +1,7 @@
 import { IHttpContext } from "../../util/adapters/httpContext";
 import { ErrorHandlerControllers } from "../../util/errors/handlerError";
 import { ICreateVotersController } from "../../voter/controllers/createVotersController";
-import { IVoteCreateData } from "../models/vote";
+import { IVoteCreateDataWithToken } from "../models/vote";
 import { ICreateVoteService } from "../services/createVoteService";
 
 export interface ICreateVoteController {
@@ -15,7 +15,7 @@ export class CreateVoteController extends ErrorHandlerControllers implements ICr
 
   public async execute(httpContext: IHttpContext): Promise<void> {
     try {
-      const data = httpContext.getRequest().body as IVoteCreateData;
+      const data = httpContext.getRequest().body as IVoteCreateDataWithToken;
       const result = await this.createVoterService.execute(data);
       httpContext.send({ statusCode: 201, body: result });
     } catch (error) {

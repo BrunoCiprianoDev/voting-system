@@ -10,3 +10,7 @@ export interface IVoteCreateData {
   voterId: string;
   candidatesId: string[];
 }
+
+export interface IVoteCreateDataWithToken extends Omit<IVoteCreateData, 'voterId'> {
+  token: string;
+}
