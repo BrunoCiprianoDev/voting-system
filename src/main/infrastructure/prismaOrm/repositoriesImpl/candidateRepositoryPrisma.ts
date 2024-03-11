@@ -7,14 +7,13 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
     super();
   }
 
-  public async create({ id, name, position, votes }: ICandidate): Promise<void> {
+  public async create({ id, name, position }: ICandidate): Promise<void> {
     try {
       await this.dbClientInstance.candidate.create({
         data: {
           id,
           name,
           positionId: position.id,
-          votes,
         },
       });
     } catch (error) {
@@ -22,14 +21,13 @@ export class CandidateRepositoryPrisma extends BaseRepositoryPrisma implements I
     }
   }
 
-  public async update({ id, name, position, votes }: ICandidate): Promise<void> {
+  public async update({ id, name, position }: ICandidate): Promise<void> {
     try {
       await this.dbClientInstance.candidate.update({
         where: { id },
         data: {
           name,
           positionId: position.id,
-          votes,
         },
       });
     } catch (error) {
