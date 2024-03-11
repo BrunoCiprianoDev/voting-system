@@ -5,6 +5,7 @@ export interface IVoter {
   registration: string;
   election: IElection;
   email: string;
+  alreadyVoted: boolean;
 }
 
 export interface IVoterCreateData {

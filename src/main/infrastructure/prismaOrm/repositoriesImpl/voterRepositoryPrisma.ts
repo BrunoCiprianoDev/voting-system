@@ -25,6 +25,23 @@ export class VoterRepositoryPrisma extends BaseRepositoryPrisma implements IVote
     }
   }
 
+  public async setAlreadyVoteIsTrue(id: string): Promise<void> {
+    try {
+      await this.dbClientInstance.voter.update({ where: { id }, data: { alreadyVoted: true } });
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
+
+  public async setAlreadyVoteIsFalse(id: string): Promise<void> {
+    try {
+      await this.dbClientInstance.voter.update({ where: { id }, data: { alreadyVoted: false } });
+    } catch (error) {
+      this.handleError(error);
+    }
+  }
+
   public async findById(id: string): Promise<IVoter | null> {
     try {
       return this.dbClientInstance.voter.findUnique({

@@ -3,6 +3,7 @@ import { IVoter } from "../../voter/model/voter";
 export interface IVote {
   id: string;
   candidateId: string;
+  voterId: string;
   voter: IVoter;
 }
 

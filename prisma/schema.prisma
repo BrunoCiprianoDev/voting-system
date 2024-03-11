@@ -52,7 +52,7 @@ model Vote {
   voter       Voter  @relation(fields: [voterId], references: [id])
   voterId     String
 
-  @@map("vote")
+  @@map("votes")
 }
 
 model Position {

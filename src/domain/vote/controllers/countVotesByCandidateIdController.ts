@@ -6,7 +6,7 @@ export interface ICountVotesByCandidateIdController {
   execute(httpContext: IHttpContext): Promise<void>;
 }
 
-export class GetVotesByCandidateIdController extends ErrorHandlerControllers implements ICountVotesByCandidateIdController {
+export class CountVotesByCandidateIdController extends ErrorHandlerControllers implements ICountVotesByCandidateIdController {
   constructor(private countVotesByCandidateIdService: ICountVotesByCandidateIdService) {
     super();
   }
