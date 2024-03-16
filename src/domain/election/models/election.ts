@@ -5,4 +5,4 @@ export interface IElection {
   isActive: boolean;
 }
 
-export interface IElectionCreateData extends Omit<IElection, 'id'> {}
+export interface IElectionCreateData extends Omit<IElection, 'id'> { }
