@@ -25,8 +25,18 @@ CREATE TABLE "voters" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "electionId" TEXT NOT NULL,
+    "alreadyVoted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "voters_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "votes" (
+    "id" TEXT NOT NULL,
+    "candidateId" TEXT NOT NULL,
+    "voterId" TEXT NOT NULL,
+
+    CONSTRAINT "votes_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -53,6 +63,9 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
 ALTER TABLE "voters" ADD CONSTRAINT "voters_electionId_fkey" FOREIGN KEY ("electionId") REFERENCES "elections"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "votes" ADD CONSTRAINT "votes_voterId_fkey" FOREIGN KEY ("voterId") REFERENCES "voters"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "positions" ADD CONSTRAINT "positions_electionId_fkey" FOREIGN KEY ("electionId") REFERENCES "elections"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
